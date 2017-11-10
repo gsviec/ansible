@@ -1,0 +1,10 @@
+- set_fact:
+    repo_file: /etc/yum.repos.d/elastic.repo
+   
+- name: "Configure the package management system"
+  copy: src=files/elastic.repo dest={{ repo_file }} owner=root mode=0600
+
+- name: Install elastic
+  yum: pkg={{ item }} state=installed
+  with_items:
+   - elasticsearch

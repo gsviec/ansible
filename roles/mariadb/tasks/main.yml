@@ -1,0 +1,10 @@
+- set_fact: role_name=mariadb
+
+##################################################
+### Install MariaDB
+- include: install.yml
+- include: configure.yml
+- include: secure.yml
+
+- debug:
+    msg: "System {{ inventory_hostname }} has uuid {{ mariadb_admin_user }}"

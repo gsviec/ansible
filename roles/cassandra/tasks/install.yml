@@ -1,0 +1,34 @@
+- set_fact:
+    cassandra_repo_file: /etc/yum.repos.d/cassandra.repo
+   
+- name: "Configure the package management system"
+  copy: src=files/cassandra.repo dest={{ cassandra_repo_file }} owner=root mode=0600
+
+- name: Install cassandra
+  yum: pkg={{ item }} state=installed
+  with_items:
+   - cassandra
+
+- name: Install liuv
+  yum: 
+    name: http://downloads.datastax.com/cpp-driver/centos/7/dependencies/libuv/v1.14.1/libuv-1.14.1-1.el7.centos.x86_64.rpm
+    state: present
+- name: Install liuv dev
+  yum: 
+    name: http://downloads.datastax.com/cpp-driver/centos/7/dependencies/libuv/v1.14.1/libuv-devel-1.14.1-1.el7.centos.x86_64.rpm
+    state: present
+
+- name: Install liuv dev
+  yum: 
+    name: http://downloads.datastax.com/cpp-driver/centos/7/cassandra/v2.7.1/cassandra-cpp-driver-2.7.1-1.el7.centos.x86_64.rpm
+    state: present
+
+- name: Install liuv dev
+  yum: 
+    name: http://downloads.datastax.com/cpp-driver/centos/7/cassandra/v2.7.1/cassandra-cpp-driver-devel-2.7.1-1.el7.centos.x86_64.rpm
+    state: present
+- name: Install extension
+  shell: pecl install cassandra
+
+- name: Add config php ini
+  shell: echo "extension=cassandra.so" > /etc/php.d/cassandra.ini

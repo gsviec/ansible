@@ -1,0 +1,19 @@
+- name: Add allow rule for 3306 to firewall
+  firewalld: zone=public port=3306/tcp permanent=true state=enabled
+  notify:
+  - Restart the mariadb service
+- name: Create a new database with name "{{ drupal_db_name }}"
+  mysql_db:
+    name: "{{ drupal_db_name }}"
+    state: present
+
+# Copy database dump file to remote host and restore it to database 'my_db'
+- name: Copy database dump file
+  copy:
+    src: files/db.sql
+    dest: /tmp/
+- name: Restore database
+  mysql_db:
+    name: "{{ drupal_db_name }}"
+    state: import
+    target: /tmp/db.sql

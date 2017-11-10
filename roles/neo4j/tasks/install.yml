@@ -1,0 +1,10 @@
+- set_fact:
+    repo_file: /etc/yum.repos.d/neo4j.repo
+   
+- name: "Configure the package management system"
+  copy: src=files/neo4j.repo dest={{ repo_file }} owner=root mode=0600
+
+- name: Install neo4j
+  yum: pkg={{ item }} state=installed
+  with_items:
+   - neo4j

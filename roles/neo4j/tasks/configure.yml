@@ -1,0 +1,4 @@
+- name: restart elasticsearch
+  shell: service neo4j start
+- name: Bootup
+  shell: chkconfig neo4j on

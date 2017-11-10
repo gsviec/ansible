@@ -1,0 +1,14 @@
+web01 ansible_ssh_host=54.198.47.182 ansible_ssh_port=22
+web02 ansible_ssh_host=52.91.57.224 ansible_ssh_port=22
+db1 ansible_ssh_host=52.90.178.188 ansible_ssh_port=22
+ha1 ansible_ssh_host=34.207.217.19 ansible_ssh_port=22
+
+[web]
+web01
+web02
+
+[db]
+db1
+
+[haproxy]
+ha1

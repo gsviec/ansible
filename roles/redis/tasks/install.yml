@@ -1,0 +1,14 @@
+- name: Install redis
+  yum: pkg={{ item }} state=installed
+  with_items:
+   - redis
+
+- name: Install extension redisphp
+  shell: |
+    git clone https://github.com/phpredis/phpredis.git
+    cd phpredis
+    git checkout php7
+    phpize
+    ./configure
+    make && make install
+    echo "extension=redis.so" > /etc/php.d/redis.ini

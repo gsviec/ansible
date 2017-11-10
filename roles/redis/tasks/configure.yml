@@ -1,0 +1,4 @@
+- name: restart elasticsearch
+  shell: service redis start
+- name: Bootup
+  shell: chkconfig redis on

@@ -1,0 +1,56 @@
+
+
+server {
+    listen   80 default;
+    server_name lackky.dev;
+
+
+    root /usr/share/nginx/minds/front/public;
+    index index.php index.html;
+
+    server_name _;
+
+    sendfile off;
+
+    location / {
+        try_files $uri $uri/ @rewrite;
+    }
+
+    location ~ ^(/api|/fs|/icon|/carousel) {
+        add_header 'Access-Control-Allow-Origin' "$http_origin";
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Mx-ReqToken,X-Requested-With';
+        add_header 'X-foo' 'Bar';
+
+        set $cors "api";
+        rewrite ^(.+)$ /index.php last;
+  }
+
+    location @rewrite {
+      rewrite ^(.+)$ /index.php last;
+    }
+
+    # pass the PHP scripts to FastCGI server listening on socket
+    location ~ \.php$ {
+    try_files $uri =404;
+        include fastcgi_params;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_param SCRIPT_FILENAME /usr/share/nginx/minds/index.php;
+        fastcgi_index index.php;
+        fastcgi_pass unix:/var/run/php-fpm-www.sock;
+
+    }
+
+  location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml)$ {
+          expires           5d;
+  }
+
+    # deny access to . files, for security
+    #
+    location ~ /\. {
+            log_not_found off;
+            deny all;
+    }
+
+}

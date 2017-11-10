@@ -1,0 +1,4 @@
+- name: restart cassandra
+  shell: service cassandra start
+- name: Bootup
+  shell: chkconfig cassandra on

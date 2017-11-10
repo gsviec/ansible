@@ -1,0 +1,4 @@
+web01 ansible_ssh_host=54.87.165.128 ansible_ssh_port=22
+[web]
+web01
+

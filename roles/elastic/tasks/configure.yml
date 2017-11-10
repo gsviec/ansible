@@ -1,0 +1,4 @@
+- name: restart elasticsearch
+  shell: service elasticsearch start
+- name: Bootup
+  shell: chkconfig elasticsearch on

@@ -1,0 +1,7 @@
+- set_fact: role_name=nodejs
+
+##################################################
+
+- name: Install basic packages
+  shell: yum install nodejs npm -y
+

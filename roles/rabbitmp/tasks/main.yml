@@ -1,0 +1,16 @@
+- set_fact: role_name=basics
+
+##################################################
+### Basic system packages and firewall config
+
+- name: Install basic packages
+  shell: yum install erlang -y
+
+- name: Install rabbitmq
+  yum: 
+    name: https://dl.bintray.com/rabbitmq/rabbitmq-server-rpm/rabbitmq-server-3.6.12-1.el7.noarch.rpm
+    state: present
+
+- name: Set up firewall
+  shell: systemctl start rabbitmq-server
+
