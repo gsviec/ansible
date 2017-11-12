@@ -13,23 +13,23 @@
   tags:
     - ipbind
 
-- name: pause
-  pause: seconds=20
+# - name: pause
+#   pause: seconds=20
 
-- name: Install Pymongo
-  easy_install:
-    name: pymongo
-    state: latest
+# - name: Install Pymongo
+#   easy_install:
+#     name: pymongo
+#     state: latest
 
-- name: add the admin user
-  mongodb_user:
-    database: admin
-    name: root
-    password: "{{ mongo_admin_pass }}"
-    login_port: "{{ mongod_port }}"
-    roles: userAdminAnyDatabase
-    state: present
-  #ignore_errors: yes
+# - name: add the admin user
+#   mongodb_user:
+#     database: admin
+#     name: root
+#     password: "{{ mongo_admin_pass }}"
+#     login_port: "{{ mongod_port }}"
+#     roles: userAdminAnyDatabase
+#     state: present
+#   #ignore_errors: yes
 
 - name: Restart mongod
   shell: service mongod restart

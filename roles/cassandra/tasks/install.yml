@@ -1,6 +1,10 @@
 - set_fact:
     cassandra_repo_file: /etc/yum.repos.d/cassandra.repo
-   
+    
+- rpm_key:
+    state: present
+    key: https://www.apache.org/dist/cassandra/KEYS
+
 - name: "Configure the package management system"
   copy: src=files/cassandra.repo dest={{ cassandra_repo_file }} owner=root mode=0600
 
@@ -27,8 +31,12 @@
   yum: 
     name: http://downloads.datastax.com/cpp-driver/centos/7/cassandra/v2.7.1/cassandra-cpp-driver-devel-2.7.1-1.el7.centos.x86_64.rpm
     state: present
+- name: Install GMP
+  shell: yum install gmp-devel
+
 - name: Install extension
   shell: pecl install cassandra
+  ignore_errors: yes
 
 - name: Add config php ini
   shell: echo "extension=cassandra.so" > /etc/php.d/cassandra.ini
