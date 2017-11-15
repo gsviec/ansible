@@ -2,7 +2,7 @@
 
 ##################################################
 ### Install PHP
-# - include: install.yml
+- include: install.yml
 - include: configure.yml
 
 
