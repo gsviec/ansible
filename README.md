@@ -13,6 +13,8 @@ web01 | SUCCESS => {
     "ping": "pong"
 }
 
+```
+
 If you verfy false you need consider edit this line [inveter host](https://github.com/gsviec/ansible/blob/master/hosts/local/inventory#L2)
 
 ```
