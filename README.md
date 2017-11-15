@@ -45,6 +45,7 @@ composer install --no-dev
 mkdir --parents --mode=0777 /tmp/minds-cache/
 mkdir --parents --mode=0777 /data
 
+```
 
 ### Setup minds backend
 
@@ -56,3 +57,4 @@ php bin/cli.php install --domain=lackky.dev --username=phanbook \
  --email=hello@phanbook.com \
   --private-key=/usr/share/nginx/minds/.dev/minds.pem \
    --public-key=/usr/share/nginx/minds/.dev/minds.pub  
+```
