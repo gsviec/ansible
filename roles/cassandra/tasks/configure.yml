@@ -1,4 +1,10 @@
+- name: Config node
+  copy: src=files/cassandra.yaml dest=/etc/cassandra/conf/cassandra.yaml owner=root mode=0777
+- name: SELIUNUX
+  shell: setsebool -P httpd_can_network_connect 1
+  
 - name: restart cassandra
-  shell: service cassandra start
+  shell: service cassandra restart
+  
 - name: Bootup
   shell: chkconfig cassandra on

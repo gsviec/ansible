@@ -14,3 +14,6 @@
 - name: Set up firewall
   shell: systemctl start rabbitmq-server
 
+- name: Set up firewall
+  shell: chkconfig rabbitmq-server on
+

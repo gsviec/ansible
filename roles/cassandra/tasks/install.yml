@@ -8,6 +8,9 @@
 - name: "Configure the package management system"
   copy: src=files/cassandra.repo dest={{ cassandra_repo_file }} owner=root mode=0600
 
+- name: Updatte
+  shell: yum update -y
+  
 - name: Install cassandra
   yum: pkg={{ item }} state=installed
   with_items:
