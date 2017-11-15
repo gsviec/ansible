@@ -13,9 +13,21 @@ web01 | SUCCESS => {
     "ping": "pong"
 }
 
+If you verfy false you need consider edit this line [inveter host](https://github.com/gsviec/ansible/blob/master/hosts/local/inventory#L2)
 
 ```
-After that running followign command below:
+web01 ansible_ssh_host=52.203.122.188 ansible_ssh_port=22
+
+```
+
+To be 
+
+```
+web01 ansible_ssh_host=xxx.xxx.xxx ansible_ssh_port=22 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+```
+
+Inside xxx.xxx.xxx is your server, ansible_ssh_user is username your sever. After that running followign command below:
 
 ```
 ansible-playbook -i hosts/local/inventory playbook.yml
