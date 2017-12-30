@@ -8,12 +8,12 @@
   yum: name=* state=latest
 
 - name: Install php
-  yum: pkg={{ item }} enablerepo=remi,remi-php70 state=present
+  yum: pkg={{ item }} enablerepo=remi,remi-php72 state=present
   with_items:
     - php
 
 - name: Install php modules
-  yum: pkg={{ item }} enablerepo=remi,remi-php70 state=present
+  yum: pkg={{ item }} enablerepo=remi,remi-php72 state=present
   with_items:
     - php-fpm
     - php-mbstring
@@ -38,6 +38,16 @@
 
 - name: Adding extension
   shell: echo "extension=mongodb.so" > /etc/php.d/mongodb.ini
+
+- name: Install extension redisphp
+  shell: |
+    git clone https://github.com/phpredis/phpredis.git
+    cd phpredis
+    git checkout php7
+    phpize
+    ./configure
+    make && make install
+    echo "extension=redis.so" > /etc/php.d/redis.ini
 
 - name: Bootup
   shell: chkconfig php-fpm on
