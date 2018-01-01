@@ -1,33 +1,26 @@
-# - hosts: all
+- hosts: all
+  become: true
+  roles:
+    - { role: basics,  tags: [ 'basics'] }
+    - { role: nginx,  tags: [ 'nginx'] }
+    - { role: php,  tags: [ 'php'] }
+    - { role: mariadb,  tags: [ 'mariadb'] }
+    - { role: cassandra,  tags: [ 'cassandra'] }
+    - { role: elastic,  tags: [ 'elastic'] }
+    - { role: rabbitmp,  tags: [ 'rabbit'] }
+    - { role: nodejs,  tags: [ 'nodejs'] }
+    - { role: mongodb,  tags: [ 'mongodb'] }
+    - { role: neo4j,  tags: [ 'neo4j'] }
+    - { role: redis,  tags: [ 'redis'] }
+
+# - hosts: db
 #   become: true
 #   roles:
-#     - { role: basics,  tags: [ 'basics'] }
-#     - { role: nginx,  tags: [ 'nginx'] }
-#     - { role: php,  tags: [ 'php'] }
-#     - { role: mariadb,  tags: [ 'mariadb'] }
-#     - { role: cassandra,  tags: [ 'cassandra'] }
-#     - { role: elastic,  tags: [ 'elastic'] }
-#     - { role: rabbitmp,  tags: [ 'rabbit'] }
-#     - { role: nodejs,  tags: [ 'nodejs'] }
-#     - { role: mongodb,  tags: [ 'mongodb'] }
-#     - { role: neo4j,  tags: [ 'neo4j'] }
-#     - { role: redis,  tags: [ 'redis'] }
-#     - { role: glusterfs,  tags: [ 'glusterfs'] }
+#   #- basics
+#   - mariadb
 
-- hosts: db
-  become: true
-  roles:
-  #- basics
-  - mariadb
-
-- hosts: haproxy
-  become: true
-  roles:
-  - basics
-  - haproxy
-
-- hosts: glusterfs
-  become: true
-  roles:
-  #- basics
-  - glusterfs
+# - hosts: haproxy
+#   become: true
+#   roles:
+#   - basics
+#   - haproxy

@@ -1,14 +1,5 @@
 #192.168.1.10 ansible_connection=ssh ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
-web01 ansible_ssh_host=34.228.12.148 ansible_ssh_port=22
-node1.glusterfs ansible_ssh_host=34.228.12.148 ansible_ssh_port=22
-node2.glusterfs ansible_ssh_host=54.163.62.129 ansible_ssh_port=22
-
+web01 ansible_ssh_host=52.203.122.188 ansible_ssh_port=22
 [web]
 web01
 
-[glusterfs]
-node1.glusterfs
-node2.glusterfs
-
-[glusterfs:vars]
-glusterfs_cluster_name=glusterfs
