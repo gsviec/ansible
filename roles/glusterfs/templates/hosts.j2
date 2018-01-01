@@ -1,0 +1,23 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+172.31.72.212    gluster1
+172.31.30.71     gluster2
+
+gluster volume create example-volume replica 2 gluster1:/data/example-volume gluster2:/data/example-volume force
+
+gluster volume create g1 replica 2 transport tcp gluster1:/srv/www gluster2:/srv/www force
+
+mount -t glusterfs gluster2:/example-volume /var/www/app
+mount -t glusterfs gluster1:/example-volume /var/www/app
+
+mount -t glusterfs gluster2:/g1 /var/www/app
+mount -t glusterfs gluster1:/ashleyrich_com /var/www/app
+
+
+firewall-cmd --zone=internal --add-source=172.31.72.1/32 --permanent
+firewall-cmd --zone=internal --add-source=172.31.30.1/32 --permanent
+
+
+gluster2:/g1 /var/www/app       glusterfs     defaults,_netdev  0  0
+gluster1:/g1 /var/www/app       glusterfs     defaults,_netdev  0  0

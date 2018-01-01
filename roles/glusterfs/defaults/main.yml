@@ -1,0 +1,2 @@
+gluster_volumes: [brick1, brick2]
+gluster_version: 38
