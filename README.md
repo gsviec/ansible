@@ -73,7 +73,11 @@ php bin/cli.php install --domain=lackky.dev --username=phanbook \
    --public-key=/usr/share/nginx/minds/.dev/minds.pub  
 ```
 
+ mkdir -p /data/glusterfs/bricks
 
+gluster volume create g-wordpress replica 2 transport tcp node2.glusterfs:/data/glusterfs/bricks node1.glusterfs:/data/glusterfs/bricks force
+
+mount.glusterfs node1.glusterfs:/g-wordpress /srv/www
 
 172.31.28.161  node1
 172.31.19.213  node2
