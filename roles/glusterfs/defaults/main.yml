@@ -1,2 +1,3 @@
 gluster_volumes: [brick1, brick2]
-gluster_version: 38
+gluster_version: 310
+gluster_node_lan: [172.31.66.177, 172.31.78.33]

@@ -1,14 +1,41 @@
-- include: centos.yml
-  when: ansible_distribution == 'CentOS'
+- name: Set fact glusterfs nodes list
+  set_fact:
+    glusterfs_nodes: "{{ ansible_play_hosts }}"
+  run_once: True
+  when: glusterfs_nodes is undefined
+# - include: centos.yml
+# - include: secure.yml
 
-- name: "Ensure the glusterd service is running"
-  service: >
-    name=glusterd
-    state=started
-    enabled=yes
-    runlevel=5
-  tags:
-    - glusterfs
+# - name: "Ensure the glusterd service is running"
+#   service: >
+#     name=glusterd
+#     state=started
+#     enabled=yes
+#     runlevel=5
+#   tags:
+#     - glusterfs
+
+# - debug:
+#     msg: "System {{ groups.glusterfs }} "
+# - name: Display all variables/facts known for a host
+#   debug:
+#     var: hostvars
+#     verbosity: 4
+
+- name: Overwite ect file
+  template: src="hosts.j2" dest=/etc/hosts
+
+- name: Configure glusterfs peers
+  shell: gluster peer probe {{ item }}
+  register: glusterfs_peer_probe
+  changed_when: "'already in peer list' not in glusterfs_peer_probe.stdout"
+  delegate_to: "{{ glusterfs_nodes[0] }}"
+  run_once: True
+  with_items: "{{ glusterfs_nodes }}"
+  when: >
+    item != glusterfs_nodes[0]
+      
+
 
 # - name: "Create brick directory"
 #   file: >

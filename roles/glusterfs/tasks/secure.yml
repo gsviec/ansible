@@ -1,5 +1,7 @@
 - name: Allow public to port glusterfs in firewall
   shell:  firewall-cmd --zone=public --add-service=glusterfs
+- name: Enable required ports on the firewall
+  shell: firewall-cmd --zone=public --add-port=24007-24010/tcp --permanent
 
 - name: Reload firewall
   shell: firewall-cmd --reload

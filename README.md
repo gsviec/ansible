@@ -72,3 +72,8 @@ php bin/cli.php install --domain=lackky.dev --username=phanbook \
   --private-key=/usr/share/nginx/minds/.dev/minds.pem \
    --public-key=/usr/share/nginx/minds/.dev/minds.pub  
 ```
+
+
+
+172.31.28.161  node1
+172.31.19.213  node2

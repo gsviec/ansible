@@ -1,0 +1,4 @@
+drupal_db_name: d8 
+drupal_db_user: phanbook
+drupal_db_password: phanbook
+drupal_db_host: 127.0.0.1
